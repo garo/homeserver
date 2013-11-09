@@ -1,0 +1,25 @@
+{
+  "name":"doorserver",
+  "version" : "1.0.1",
+  "description":"Simple Door Security Server for Raspberry Pi. Supports RFID id tags for authentication.",
+  "author":"Juho Mäkinen <juho.makinen@gmail.com>",
+  "dependencies":{
+    "mysql":"0.9.x",
+    "async":"0.2.x",
+    "moment":"2.2.x",
+    "express":"3.4.x",
+    "express-resource":"1.0.x"
+  },
+  "optionalDepencies":{
+    "simplespi":"0.0.x"
+  },
+  "devDependencies":{
+    "mocha":"1.12.x",
+    "jshint":"2.1.10",
+    "sinon":"1.7.3",
+    "restler":"0.2.2"
+  },
+
+  "engine":"node >= 0.10.0"
+}
+
