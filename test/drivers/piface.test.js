@@ -15,4 +15,18 @@ describe('piface', function () {
       });
     });
   });
+
+  it("should be able to read inpus", function () {
+    var old = piface.simplespi.send;
+    piface.simplespi.send = function() {
+      return "0000AB";
+    };
+
+    var inputBits = piface.readInputs();
+
+    // Inputs are low-bit-on, but the user doesn't need to know that
+    assert.equal(84, inputBits);
+
+    piface.simplespi.send = old;
+  });
 });
