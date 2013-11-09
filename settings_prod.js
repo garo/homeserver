@@ -6,7 +6,7 @@ settings.mysql = {
 settings.statefile = '/state/homeserver.state.json';
 
 settings.energypump = {
-  athomerelaypin : 1
+  athomerelaypin : 0
 };
 
 exports.get = function (key) {
