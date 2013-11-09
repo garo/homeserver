@@ -13,12 +13,16 @@ settings.energypump = {
   athomerelaypin : 1
 };
 
+settings.zabbix = {
+  host : "172.16.140.22"
+};
+
 settings.alarms = {
-  "0" : { name : "Olohuone", triggeron : "low", extracheck : motionSensorCheck },
-  "1" : { name : "Apukeittiš", triggeron : "low", extracheck : motionSensorCheck },
-  "2" : { name : "Eteinen", triggeron : "low", extracheck : motionSensorCheck },
-  "3" : { name : "Parvi", triggeron : "low", extracheck : motionSensorCheck },
-  "4" : { name : "Energiapumppu", triggeron : "high" }
+  "0" : { name : "Olohuone", triggeron : "low", extracheck : motionSensorCheck, zabbix_key : "alarms.olohuone" },
+  "1" : { name : "Parvi", triggeron : "low", extracheck : motionSensorCheck,zabbix_key : "alarms.parvi"  },
+  "2" : { name : "Eteinen", triggeron : "low", extracheck : motionSensorCheck, zabbix_key : "alarms.eteinen"  },
+  "3" : { name : "Apukeittiš", triggeron : "low", extracheck : motionSensorCheck, zabbix_key : "alarms.apukeittio"  },
+  "4" : { name : "Energiapumppu", triggeron : "high", zabbix_key : "alarms.energiapumppu"  }
 };
 
 // Business logic: Don't alert on motion sensors when we're at home
