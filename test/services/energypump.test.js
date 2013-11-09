@@ -13,12 +13,14 @@ describe('energypump', function () {
 
   describe("setAtHomeState", function() {
     it("should set correct piface pin to on", function (done) {
-      var on = sinon.spy(homeserver.drivers.piface, "on", function (pin) {
+      var on = sinon.spy(homeserver.drivers.piface, "on", function (pin, cb) {
         assert.equal(pin, 1); // 1 is from settings_test
+        cb();
       });
       var setState = sinon.spy(homeserver.repositories.state, "set", function (key, value, cb) {
         assert.equal(key, "energypump");
         assert.deepEqual(value, {athome:true});
+        cb();
       });
       homeserver.services.energypump.setAtHomeState(true, function (err) {
         assert.ok(on.called);
@@ -30,12 +32,14 @@ describe('energypump', function () {
     });
 
     it("should set correct piface pin to off", function (done) {
-      var off = sinon.spy(homeserver.drivers.piface, "off", function (pin) {
+      var off = sinon.spy(homeserver.drivers.piface, "off", function (pin, cb) {
         assert.equal(pin, 1); // 1 is from settings_test
+        cb();
       });
       var setState = sinon.spy(homeserver.repositories.state, "set", function (key, value, cb) {
         assert.equal(key, "energypump");
         assert.deepEqual(value, {athome:false});
+        cb();
       });
       homeserver.services.energypump.setAtHomeState(false, function (err) {
         assert.ok(off.called);

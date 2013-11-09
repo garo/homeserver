@@ -1,1 +1,1 @@
-{"teststate":"foobar","pifacestate":2,"newkey":"yay","energypump":{"athome":true}}
+{"teststate":"foobar","pifacestate":0,"newkey":"yay","energypump":{"athome":false}}
