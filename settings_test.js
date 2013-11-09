@@ -1,3 +1,6 @@
+var homeserver = require('./lib/homeserver');
+
+
 var settings = {};
 
 settings.mysql = {
@@ -19,7 +22,7 @@ settings.alarms = {
 };
 
 // Business logic: Don't alert on motion sensors when we're at home
-function motionSensorCheck(cb) {
+function motionSensorCheck(alarm, cb) {
   homeserver.services.energypump.getAtHomeState(function (err, athome) {
     if (athome) {
       // Dont alert on motion sensors when we're at home
