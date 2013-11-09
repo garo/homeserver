@@ -11,7 +11,7 @@ describe('energypump', function () {
   });
 
   describe("checkAlarms", function () {
-    it("should get input bits from piface and check for alarms", function () {
+    it("should get input bits from piface and check for alarms when triggeron:high", function () {
       var readInputs = sinon.stub(homeserver.drivers.piface, "readInputs", function () {
         return 0xff;
       });
@@ -27,7 +27,7 @@ describe('energypump', function () {
         };
       });
 
-      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "triggerAlarm", function (alarm) {
+      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "processAlarm", function (alarm) {
         assert.equal("Energiapumppu", alarm.name);
       });
 
@@ -40,6 +40,33 @@ describe('energypump', function () {
       settingsGet.restore();
       triggerAlarm.restore();
     });
+
+    it("should get input bits from piface and check for alarms when triggeron:low", function () {
+      var readInputs = sinon.stub(homeserver.drivers.piface, "readInputs", function () {
+        return 0;
+      });
+
+      var settingsGet = sinon.stub(homeserver.settings, "get", function (key) {
+        assert.equal(key, "alarms");
+        return {
+          "0":{ name:"Olohuone", triggeron:"low" }
+        };
+      });
+
+      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "processAlarm", function (alarm) {
+        assert.equal("Olohuone", alarm.name);
+      });
+
+      homeserver.services.alarmservice.checkAlarms();
+
+      assert.ok(readInputs.called);
+      assert.ok(settingsGet.called);
+      assert.ok(triggerAlarm.called);
+      readInputs.restore();
+      settingsGet.restore();
+      triggerAlarm.restore();
+    });
+
   });
 
 });
