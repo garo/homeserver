@@ -10,26 +10,9 @@ describe('piface', function () {
 
   it("should be able to turn relay on and off", function (done) {
     piface.on(1, function () {
-      setTimeout(function () {
-        piface.off(1, function () {
-          piface.off(3, function () {
-            piface.off(4, function () {
-              done();
-
-            });
-
-
-          });
-
-        });
-      }, 200);
-
-      piface.on(3, function () {
-        piface.on(4, function() {});
+      piface.off(1, function () {
+        done();
       });
-
     });
-
   });
-
 });
