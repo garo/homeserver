@@ -26,16 +26,17 @@ settings.alarms = {
 };
 
 // Business logic: Don't alert on motion sensors when we're at home
-function motionSensorCheck(alarm, cb) {
+function motionSensorCheck(pin, check, cb) {
   homeserver.services.energypump.getAtHomeState(function (err, athome) {
     if (athome) {
       // Dont alert on motion sensors when we're at home
-      cb(null, false);
+      cb(null, pin, check, false);
     } else {
-      cb(null, true);
+      cb(null, pin, check, true);
     }
   });
 }
+
 exports.get = function (key) {
   return settings[key];
 };
