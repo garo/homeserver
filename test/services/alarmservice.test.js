@@ -27,7 +27,7 @@ describe('energypump', function () {
         };
       });
 
-      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "processAlarm", function (alarm) {
+      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "triggerAlarm", function (alarm) {
         assert.equal("Energiapumppu", alarm.name);
       });
 
@@ -53,7 +53,7 @@ describe('energypump', function () {
         };
       });
 
-      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "processAlarm", function (alarm) {
+      var triggerAlarm = sinon.stub(homeserver.services.alarmservice, "triggerAlarm", function (alarm) {
         assert.equal("Olohuone", alarm.name);
       });
 
